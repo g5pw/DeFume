@@ -1,0 +1,106 @@
+__S0 2008 0 ABS
+__S1 24 0 ABS
+__S2 0 0 ABS
+__Hintentry F 0 CODE
+__Lintentry 4 0 CODE
+__pintentry 4 0 CODE
+_isr 14 0 CODE
+_GPIO 5 0 ABS
+_main 1F 0 CODE
+btemp 5E 0 ABS
+?_isr 20 0 BANK0
+_exit F 0 CODE
+start F 0 CODE
+reset_vec 0 0 CODE
+wtemp0 5E 0 ABS
+__Hosccal 3FF 0 CODE
+__Losccal 3FF 0 CODE
+interrupt_function 4 0 CODE
+__Hconfig 2008 0 CONFIG
+__Lconfig 2007 0 CONFIG
+___osccal_val 3FF 0 CODE
+__Hram 7FE 0 ABS
+__Lram 7FE 0 ABS
+?_main 20 0 BANK0
+__size_of_isr 0 0 ABS
+??_isr 20 0 BANK0
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+__Hcommon 7FE 0 ABS
+__Lcommon 7FE 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+__Habs1 7FE 0 ABS
+__Labs1 7FE 0 ABS
+__Hsfr0 7FE 0 ABS
+__Lsfr0 7FE 0 ABS
+_TRISIO 85 0 ABS
+__Hsfr1 7FE 0 ABS
+__Lsfr1 7FE 0 ABS
+__ptext102 14 0 CODE
+__ptext103 0 0 CODE
+__Hcode 7FE 0 ABS
+__Lcode 7FE 0 ABS
+??_main 0 0 COMMON
+__HcstackBANK0 7FE 0 ABS
+__LcstackBANK0 7FE 0 ABS
+__pcstackBANK0 20 0 BANK0
+saved_w 5E 0 ABS
+__Hinit F 0 CODE
+__Linit F 0 CODE
+__end_of_main 27 0 CODE
+__Htext 7FE 0 ABS
+__Ltext 7FE 0 ABS
+end_of_initialization 27 0 CODE
+__Hstrings 7FE 0 ABS
+__Lstrings 7FE 0 ABS
+__Hbank0 7FE 0 ABS
+__Lbank0 7FE 0 ABS
+__Hbank1 7FE 0 BANK1
+__Lbank1 7FE 0 BANK1
+__Hpowerup 0 0 CODE
+__Lpowerup 0 0 CODE
+__Hclrtext 7FE 0 ABS
+__Lclrtext 7FE 0 ABS
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+__end_of_isr 1F 0 CODE
+__Hcinit 7FE 0 ABS
+__Lcinit 7FE 0 ABS
+__size_of_main 0 0 ABS
+__Hend_init 14 0 CODE
+__Lend_init F 0 CODE
+__Hreset_vec 1 0 CODE
+__Lreset_vec 0 0 CODE
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+intlevel5 0 0 CODE
+__HcstackCOMMON 7FE 0 ABS
+__LcstackCOMMON 7FE 0 ABS
+__pcstackCOMMON 0 0 COMMON
+start_initialization 27 0 CODE
+__Hmaintext 7FE 0 ABS
+__Lmaintext 7FE 0 ABS
+__pmaintext 1F 0 CODE
+%segments
+reset_vec 0 1 CODE 0
+intentry 8 51 CODE 8
+config 400E 400F CONFIG 400E
+cstackBANK0 20 23 BANK0 20
+%locals
+dist/default/production/FanCtrl.X.production.obj
+main.c
+18 2007 0 CONFIG
+30 1F 0 CODE
+31 21 0 CODE
+33 25 0 CODE
+36 26 0 CODE
+/tmp/cgtEZUBvo
+69 27 0 CODE
+70 28 0 CODE
+main.c
+40 14 0 CODE
+38 4 0 CODE

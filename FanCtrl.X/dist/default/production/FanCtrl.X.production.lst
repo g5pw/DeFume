@@ -1,0 +1,345 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.80a build 6850 
+                                                                                               Thu May  5 16:51:31 2011
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6850
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6850"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	12F629
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 18 "main.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 18 "main.c"
+    45  2007  3FC4               	dw 0x3FFC & 0x3FF7 & 0x3FEF & 0x3FDF & 0x3FFF ;#
+    46                           	FNROOT	_main
+    47                           	FNCALL	intlevel1,_isr
+    48                           	global	intlevel1
+    49                           	FNROOT	intlevel1
+    50                           	global	_GPIO
+    51                           psect	maintext,global,class=CODE,delta=2
+    52                           global __pmaintext
+    53  001F                     __pmaintext:
+    54  0005                     _GPIO	set	5
+    55                           	global	_TRISIO
+    56  0085                     _TRISIO	set	133
+    57                           	file	"/tmp/cgtEZUBvo"
+    58                           	line	#
+    59                           psect cinit,class=CODE,delta=2
+    60                           global start_initialization
+    61  0027                     start_initialization:
+    62                           
+    63                           psect cinit,class=CODE,delta=2
+    64                           global end_of_initialization
+    65                           
+    66                           ;End of C runtime variable initialization code
+    67                           
+    68  0027                     end_of_initialization:
+    69  0027  0183               clrf status
+    70  0028  281F               ljmp _main	;jump to C main() function
+    71                           psect	cstackCOMMON,class=COMMON,space=1
+    72                           global __pcstackCOMMON
+    73  0000                     __pcstackCOMMON:
+    74                           	global	??_main
+    75  0000                     ??_main:	; 0 bytes @ 0x0
+    76                           psect	cstackBANK0,class=BANK0,space=1
+    77                           global __pcstackBANK0
+    78  0020                     __pcstackBANK0:
+    79                           	global	??_isr
+    80  0020                     ??_isr:	; 0 bytes @ 0x0
+    81                           	global	?_main
+    82  0020                     ?_main:	; 2 bytes @ 0x0
+    83                           	global	?_isr
+    84  0020                     ?_isr:	; 2 bytes @ 0x0
+    85  0020                     	ds	4
+    86 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+    87 ;;Auto spaces:   Size  Autos    Used
+    88 ;; COMMON           0      0       0
+    89 ;; BANK0           62      4       4
+    90                           
+    91 ;;
+    92 ;; Pointer list with targets:
+    93                           
+    94                           
+    95                           
+    96 ;;
+    97 ;; Critical Paths under _main in COMMON
+    98 ;;
+    99 ;;   None.
+   100 ;;
+   101 ;; Critical Paths under _isr in COMMON
+   102 ;;
+   103 ;;   None.
+   104 ;;
+   105 ;; Critical Paths under _main in BANK0
+   106 ;;
+   107 ;;   None.
+   108 ;;
+   109 ;; Critical Paths under _isr in BANK0
+   110 ;;
+   111 ;;   None.
+   112                           
+   113 ;;
+   114 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   115 ;;
+   116                           
+   117 ;;
+   118 ;;Call Graph Tables:
+   119 ;;
+   120 ;; ---------------------------------------------------------------------------------
+   121 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   122 ;; ---------------------------------------------------------------------------------
+   123 ;; (0) _main                                                 0     0      0       0
+   124 ;; ---------------------------------------------------------------------------------
+   125 ;; Estimated maximum stack depth 0
+   126 ;; ---------------------------------------------------------------------------------
+   127 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   128 ;; ---------------------------------------------------------------------------------
+   129 ;; (1) _isr                                                  4     4      0       0
+   130 ;;                                              0 BANK0      4     4      0
+   131 ;; ---------------------------------------------------------------------------------
+   132 ;; Estimated maximum stack depth 1
+   133 ;; ---------------------------------------------------------------------------------
+   134                           
+   135 ;; Call Graph Graphs:
+   136                           
+   137 ;; _main (ROOT)
+   138 ;;
+   139 ;; _isr (ROOT)
+   140 ;;
+   141                           
+   142 ;; Address spaces:
+   143                           
+   144 ;;Name               Size   Autos  Total    Cost      Usage
+   145 ;;BITCOMMON            0      0       0       0        0.0%
+   146 ;;EEDATA              80      0       0       0        0.0%
+   147 ;;NULL                 0      0       0       0        0.0%
+   148 ;;CODE                 0      0       0       0        0.0%
+   149 ;;BITSFR0              0      0       0       1        0.0%
+   150 ;;SFR0                 0      0       0       1        0.0%
+   151 ;;COMMON               0      0       0       1        0.0%
+   152 ;;BITSFR1              0      0       0       2        0.0%
+   153 ;;SFR1                 0      0       0       2        0.0%
+   154 ;;STACK                0      0       0       2        0.0%
+   155 ;;BITBANK0            3E      0       0       3        0.0%
+   156 ;;BANK0               3E      4       4       4        6.5%
+   157 ;;ABS                  0      0       0       5        0.0%
+   158 ;;DATA                 0      0       0       6        0.0%
+   159                           
+   160                           	global	_main
+   161                           psect	maintext
+   162                           
+   163 ;; *************** function _main *****************
+   164 ;; Defined at:
+   165 ;;		line 29 in file "main.c"
+   166 ;; Parameters:    Size  Location     Type
+   167 ;;		None
+   168 ;; Auto vars:     Size  Location     Type
+   169 ;;		None
+   170 ;; Return value:  Size  Location     Type
+   171 ;;                  2  232[BANK0 ] int 
+   172 ;; Registers used:
+   173 ;;		wreg, status,2
+   174 ;; Tracked objects:
+   175 ;;		On entry : 17F/0
+   176 ;;		On exit  : 0/0
+   177 ;;		Unchanged: 0/0
+   178 ;; Data sizes:     COMMON   BANK0
+   179 ;;      Params:         0       0
+   180 ;;      Locals:         0       0
+   181 ;;      Temps:          0       0
+   182 ;;      Totals:         0       0
+   183 ;;Total ram usage:        0 bytes
+   184 ;; Hardware stack levels required when called:    1
+   185 ;; This function calls:
+   186 ;;		Nothing
+   187 ;; This function is called by:
+   188 ;;		Startup code after reset
+   189 ;; This function uses a non-reentrant model
+   190 ;;
+   191                           psect	maintext
+   192                           	file	"main.c"
+   193                           	line	29
+   194                           	global	__size_of_main
+   195  0008                     	__size_of_main	equ	__end_of_main-_main
+   196                           	
+   197  001F                     _main:	
+   198                           	opt	stack 7
+   199                           ; Regs used in _main: [wreg+status,2]
+   200                           	line	30
+   201                           	
+   202  001F                     l1398:	
+   203                           ;main.c: 30: TRISIO = 0x00;
+   204  001F  1683               	bsf	status, 5	;RP0=1, select bank1
+   205  0020  0185               	clrf	(133)^080h	;volatile
+   206                           	line	31
+   207                           	
+   208  0021                     l1400:	
+   209                           ;main.c: 31: GPIO = 0x0F;
+   210  0021  300F               	movlw	(0Fh)
+   211  0022  1283               	bcf	status, 5	;RP0=0, select bank0
+   212  0023  0085               	movwf	(5)	;volatile
+   213  0024  2825               	goto	l234
+   214                           	line	33
+   215                           ;main.c: 33: while (1) {
+   216                           	
+   217  0025                     l233:	
+   218                           	line	35
+   219                           	
+   220  0025                     l234:	
+   221                           	line	33
+   222  0025  2825               	goto	l234
+   223                           	
+   224  0026                     l235:	
+   225                           	line	36
+   226                           	
+   227  0026                     l236:	
+   228                           	global	start
+   229  0026  280F               	ljmp	start
+   230                           	opt stack 0
+   231                           GLOBAL	__end_of_main
+   232  0027                     	__end_of_main:
+   233 ;; =============== function _main ends ============
+   234                           
+   235                           	signat	_main,90
+   236                           	global	_isr
+   237                           psect	text102,local,class=CODE,delta=2
+   238                           global __ptext102
+   239  0014                     __ptext102:
+   240                           
+   241 ;; *************** function _isr *****************
+   242 ;; Defined at:
+   243 ;;		line 38 in file "main.c"
+   244 ;; Parameters:    Size  Location     Type
+   245 ;;		None
+   246 ;; Auto vars:     Size  Location     Type
+   247 ;;		None
+   248 ;; Return value:  Size  Location     Type
+   249 ;;                  2  238[BANK0 ] int 
+   250 ;; Registers used:
+   251 ;;		None
+   252 ;; Tracked objects:
+   253 ;;		On entry : 0/0
+   254 ;;		On exit  : 0/0
+   255 ;;		Unchanged: 0/0
+   256 ;; Data sizes:     COMMON   BANK0
+   257 ;;      Params:         0       0
+   258 ;;      Locals:         0       0
+   259 ;;      Temps:          0       4
+   260 ;;      Totals:         0       4
+   261 ;;Total ram usage:        4 bytes
+   262 ;; Hardware stack levels used:    1
+   263 ;; This function calls:
+   264 ;;		Nothing
+   265 ;; This function is called by:
+   266 ;;		Interrupt level 1
+   267 ;; This function uses a non-reentrant model
+   268 ;;
+   269                           psect	text102
+   270                           	file	"main.c"
+   271                           	line	38
+   272                           	global	__size_of_isr
+   273  000B                     	__size_of_isr	equ	__end_of_isr-_isr
+   274                           	
+   275  0014                     _isr:	
+   276                           	opt	stack 7
+   277                           ; Regs used in _isr: []
+   278                           psect	intentry,class=CODE,delta=2
+   279                           global __pintentry
+   280  0004                     __pintentry:
+   281                           global interrupt_function
+   282  0004                     interrupt_function:
+   283                           	global saved_w
+   284  005E                     	saved_w	set	btemp+0
+   285  0004  00DE               	movwf	saved_w
+   286  0005  0803               	movf	status,w
+   287  0006  1283               	bcf	status, 5	;RP0=0, select bank0
+   288  0007  00A0               	movwf	(??_isr+0)
+   289  0008  0804               	movf	fsr0,w
+   290  0009  00A1               	movwf	(??_isr+1)
+   291  000A  080A               	movf	pclath,w
+   292  000B  00A2               	movwf	(??_isr+2)
+   293  000C  085F               	movf	btemp+1,w
+   294  000D  00A3               	movwf	(??_isr+3)
+   295  000E  2814               	ljmp	_isr
+   296                           psect	text102
+   297                           	line	40
+   298                           	
+   299  0014                     i1l239:	
+   300  0014  0823               	movf	(??_isr+3),w
+   301  0015  00DF               	movwf	btemp+1
+   302  0016  0822               	movf	(??_isr+2),w
+   303  0017  008A               	movwf	pclath
+   304  0018  0821               	movf	(??_isr+1),w
+   305  0019  0084               	movwf	fsr0
+   306  001A  0820               	movf	(??_isr+0),w
+   307  001B  0083               	movwf	status
+   308  001C  0EDE               	swapf	saved_w,f
+   309  001D  0E5E               	swapf	saved_w,w
+   310  001E  0009               	retfie
+   311                           	opt stack 0
+   312                           GLOBAL	__end_of_isr
+   313  001F                     	__end_of_isr:
+   314 ;; =============== function _isr ends ============
+   315                           
+   316                           	signat	_isr,90
+   317                           psect	text103,local,class=CODE,delta=2
+   318                           global __ptext103
+   319  0000                     __ptext103:
+   320                           	global	btemp
+   321  005E                     	btemp set 05Eh
+   322                           
+   323                           	DABS	1,94,2	;btemp
+   324                           	global	wtemp0
+   325  005E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.80a build 6850 
+Symbol Table                                                                                   Thu May  5 16:51:31 2011
+
+                 l233 0025                   l234 0025                   l235 0026                   l236 0026  
+                 _isr 0014                   fsr0 0004                  l1400 0021                  l1398 001F  
+                ?_isr 0020                  _GPIO 0005                  _main 001F                  btemp 005E  
+                start 000F                 ??_isr 0020                 ?_main 0020                 i1l239 0014  
+               pclath 000A                 status 0003                 wtemp0 005E          __end_of_main 0027  
+              ??_main 0000                _TRISIO 0085                saved_w 005E        __pcstackCOMMON 0000  
+          __pmaintext 001F            __pintentry 0004          __size_of_isr 000B  end_of_initialization 0027  
+ start_initialization 0027           __end_of_isr 001F         __pcstackBANK0 0020             __ptext102 0014  
+           __ptext103 0000     interrupt_function 0004         __size_of_main 0008              intlevel1 0000  
