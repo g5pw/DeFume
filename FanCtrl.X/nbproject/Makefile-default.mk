@@ -65,7 +65,7 @@ ifneq ($(OS_CURRENT),$(OS_ORIGINAL))
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/FanCtrl.X.${IMAGE_TYPE}.cof
 
-MP_PROCESSOR_OPTION=12F629
+MP_PROCESSOR_OPTION=12F1840
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
