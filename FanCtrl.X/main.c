@@ -15,21 +15,29 @@ __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_OFF); //Config word 1
 __CONFIG(PLLEN_ON);
 
 
-int main(void) {
-    int time_on = 0;
-    OSCCON = 0b11110000;    // Configure 32 MHz clock
-
+void pwm_init(unsigned char period){
     CCP1SEL = 1;            //CCP1 on RA5;
     TRISA = 0x3F;           // Everything is input (tri/stated)
-    PR2 = 0xFF;             // Select 31250Hz PWM period
+    PR2 = period;             // Select 31250Hz PWM period
     CCP1CON = 0x0C;         // Select PWM single output
-    CCP1CON |= (time_on & 3) << 4;
-    CCPR1L = time_on >> 2;           //Setting duty cycle: MSByte
+}
+
+void pwm_start(int pulse_width){
+    CCP1CON |= (pulse_width & 3) << 4;
+    CCPR1L = pulse_width >> 2;           //Setting duty cycle: MSByte
     TMR2IF = 0;             // Tlear Timer 2 interrupt flag
     T2CON = 0x04;           // TMR2 Prescaler:1, Enable timer 2
     while(TMR2IF = 0);      // Wait until timer2=PS2 (TMR2IF=1)
     TMR2IF = 0;             // Clear Timer2 interrupt flag
     TRISA |= 0x20;          //Enable RA5 as output
+}
+
+int main(void) {
+    OSCCON = 0b11110000;    // Configure 32 MHz clock
+
+    pwm_init(0xFF);
+    pwm_start(512);
+
 
 
 
