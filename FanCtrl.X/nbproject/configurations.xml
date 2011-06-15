@@ -53,10 +53,10 @@
         <property key="optimization-debug" value="false"/>
         <property key="optimization-level" value="-9"/>
         <property key="preprocess-assembler" value="false"/>
-        <property key="identifier-length" value="31"/>
         <property key="optimization-global" value="true"/>
-        <property key="undefine-macros" value=""/>
+        <property key="identifier-length" value="31"/>
         <property key="optimization-set" value="default"/>
+        <property key="undefine-macros" value=""/>
         <property key="optimization-speed" value="true"/>
         <property key="optimization-assembler" value="true"/>
         <property key="operation-mode" value="lite"/>

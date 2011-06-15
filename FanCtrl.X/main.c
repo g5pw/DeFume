@@ -17,8 +17,8 @@ __CONFIG(PLLEN_ON);
 
 void pwm_init(unsigned char period){
     CCP1SEL = 1;            //CCP1 on RA5;
-    TRISA = 0x3F;           // Everything is input (tri/stated)
     PR2 = period;             // Select 31250Hz PWM period
+    TRISA = 0x3F;           // Everything is input (tri/stated)
     CCP1CON = 0x0C;         // Select PWM single output
 }
 
