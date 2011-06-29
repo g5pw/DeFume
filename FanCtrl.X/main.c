@@ -17,8 +17,8 @@ __CONFIG(PLLEN_ON);
 
 void pwm_init(unsigned char period){
     CCP1SEL = 1;            //CCP1 on RA5;
-    PR2 = period;             // Select 31250Hz PWM period
-    TRISA = 0x3F;           // Everything is input (tri/stated)
+    PR2 = period;           // Select 31250Hz PWM period
+    TRISA |= 0x20;           // Everything is input (tri/stated)
     CCP1CON = 0x0C;         // Select PWM single output
 }
 
@@ -29,20 +29,21 @@ void pwm_start(int pulse_width){
     T2CON = 0x04;           // TMR2 Prescaler:1, Enable timer 2
     while(TMR2IF = 0);      // Wait until timer2=PS2 (TMR2IF=1)
     TMR2IF = 0;             // Clear Timer2 interrupt flag
-    TRISA |= 0x20;          //Enable RA5 as output
+    TRISA &= 0xDF;          //Enable RA5 as output
 }
 
 int main(void) {
     OSCCON = 0b11110000;    // Configure 32 MHz clock
+    TRISA = 0x00;
 
     pwm_init(0xFF);
     pwm_start(512);
 
-
-
-
     while (1) { // Main loop
-        
+        RA0 = 1;
+        __delay_ms(100);
+        RA0 = 0;
+        __delay_ms(100);
     }
 }
 
