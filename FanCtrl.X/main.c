@@ -4,8 +4,6 @@
  *
  * Created on February 27, 2011, 4:13 PM
  */
-
-
 #include <pic.h>	// Required to interface with delay routines
 
 #define _XTAL_FREQ 32000000
@@ -14,6 +12,7 @@
 __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_OFF); //Config word 1
 __CONFIG(PLLEN_ON);
 
+volatile char oldPORTA = 0x3F;
 
 void pwm_init(unsigned char period){
     CCP1SEL = 1;            //CCP1 on RA5;
@@ -32,21 +31,45 @@ void pwm_start(int pulse_width){
     TRISA &= 0xDF;          //Enable RA5 as output
 }
 
+void pwm_set(int pulse_width){
+    CCP1CON |= (pulse_width & 3) << 4;
+    CCPR1L = pulse_width >> 2;           //Setting duty cycle: MSByte
+}
+
 int main(void) {
     OSCCON = 0b11110000;    // Configure 32 MHz clock
-    TRISA = 0x00;
+    TRISA = 0xFF;
+    WPUA = 0x1F;            // Pullup resistors on all pins except RA5
+    IOCAN = 0x1F;           // Enable interrupts on change
+    IOCIE = 1;
+    ei();
 
     pwm_init(0xFF);
     pwm_start(512);
 
     while (1) { // Main loop
-        RA0 = 1;
-        __delay_ms(100);
-        RA0 = 0;
-        __delay_ms(100);
     }
 }
 
 interrupt isr(){
-
+    if(IOCIF){ // Someone pressed on a button!
+        __delay_ms(20); // Debounce
+        char temp = PORTA^oldPORTA;
+        oldPORTA = PORTA;
+        if(temp | 0x01){
+            TRISA &= ~(TRISA | 0x20); // Toggle PWM on/off
+        }
+        if(temp | 0x02){
+            CCPR1L += 4;        // increase PWM duty
+        }
+        if(temp | 0x04){
+            CCPR1L -= 4;        // Decrease PWM duty
+        }
+        if(temp | 0x08){
+            //RA3 pressed
+        }
+        if(temp | 0x10){
+            //RA4 pressed
+        }
+    }
 }
