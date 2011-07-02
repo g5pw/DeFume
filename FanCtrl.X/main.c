@@ -37,10 +37,12 @@ void pwm_set(int pulse_width){
 }
 
 int main(void) {
-    OSCCON = 0b11110000;    // Configure 32 MHz clock
-    TRISA = 0xFF;
-    WPUA = 0x1F;            // Pullup resistors on all pins except RA5
-    IOCAN = 0x1F;           // Enable interrupts on change
+    OSCCON = 0xF0;    // Configure 32 MHz clock
+    
+    TRISA = 0x0F;           // Everything is an input
+    nWPUEN = 0;
+    WPUA = 0x0F;            // Pullup resistors on all pins except RA5
+    IOCAN = 0x0F;           // Enable interrupts on change
     IOCIE = 1;
     ei();
 
@@ -53,6 +55,7 @@ int main(void) {
 
 interrupt isr(){
     if(IOCIF){ // Someone pressed on a button!
+        RA4 = 1;
         __delay_ms(20); // Debounce
         char temp = PORTA^oldPORTA;
         oldPORTA = PORTA;
@@ -67,9 +70,6 @@ interrupt isr(){
         }
         if(temp | 0x08){
             //RA3 pressed
-        }
-        if(temp | 0x10){
-            //RA4 pressed
         }
     }
 }
