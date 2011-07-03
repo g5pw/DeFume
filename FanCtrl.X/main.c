@@ -12,8 +12,6 @@
 __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_OFF); //Config word 1
 __CONFIG(PLLEN_ON & LVP_OFF);
 
-volatile char oldPORTA = 0x0F;
-
 void pwm_init(unsigned char period){
     CCP1SEL = 1;            //CCP1 on RA5;
     PR2 = period;           // Select 31250Hz PWM period

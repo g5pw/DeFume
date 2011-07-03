@@ -1,2 +1,5 @@
 build/
 dist/
+#ignore EAGLE backup files
+*.s#*
+*.b#*
