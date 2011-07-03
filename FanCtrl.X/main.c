@@ -39,13 +39,13 @@ void pwm_set(int pulse_width){
 int main(void) {
     OSCCON = 0xF0;    // Configure 32 MHz clock
     
-    TRISA = 0x0F;           // Everything is an input
-    ANSELA = 0x00;
-    nWPUEN = 0;
-    WPUA = 0x0F;            // Pullup resistors on all pins except RA5
+    TRISA = 0x0F;           // RA0-3 are inputs
+    ANSELA = 0x00;          // Inputs are NOT analog
+    nWPUEN = 0;             // Global pullups enabled
+    WPUA = 0x0F;            // Pullup resistors on pins RA0-3
     IOCAN = 0x0F;           // Enable interrupts on change
     IOCIE = 1;
-    GIE = 1;
+    GIE = 1;                // Enable global interrupts
 
     pwm_init(0xFF);
     pwm_start(512);
@@ -58,19 +58,25 @@ int main(void) {
 
 interrupt isr(){
     if(IOCIF){
-        if(IOCAF0){
+        if(IOCAF0){     // On/Off Button pressed
             TRISA5 = ~TRISA5;
             IOCAF0 = 0;
         }
-        if(IOCAF1){
-            CCPR1L += 4;
+        if(IOCAF1){             // Plus button pressed
+            if(CCPR1L > 0xFC)   // Prevent overflows
+                CCPR1L = 0xFF;
+            else
+                CCPR1L += 4;
             IOCAF1 = 0;
         }
-        if(IOCAF2){
-            CCPR1L -= 4;
+        if(IOCAF2){         // Minus Button pressed
+            if(CCPR1L > 4)  // Prevent underflows
+                CCPR1L -= 4;
+            else
+                CCPR1L = 0;
             IOCAF2 = 0;
         }
-        __delay_ms(10);
+        __delay_ms(10); // Debounce delay
         IOCIF = 0;
     }
 }
