@@ -1,2 +1,7 @@
---Important
-Add key repetition
+Important
+=============================
+- Add key repetition | TO BE TESTED
+
+Enhancements
+=============================
+- Capacitive buttons

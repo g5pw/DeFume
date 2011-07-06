@@ -8,6 +8,9 @@
 
 #define _XTAL_FREQ 32000000
 
+#define DEBOUNCE_DELAY 10
+#define REPEAT_DELAY 10
+
 //Setting configuration bits
 __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_OFF); //Config word 1
 __CONFIG(PLLEN_ON & LVP_OFF);
@@ -35,19 +38,18 @@ void pwm_set(int pulse_width){
 }
 
 int main(void) {
-    OSCCON = 0xF0;    // Configure 32 MHz clock
+    OSCCON = 0xF0;      // Configure 32 MHz clock
     
-    TRISA = 0x0F;           // RA0-3 are inputs
-    ANSELA = 0x00;          // Inputs are NOT analog
-    nWPUEN = 0;             // Global pullups enabled
-    WPUA = 0x0F;            // Pullup resistors on pins RA0-3
-    IOCAN = 0x0F;           // Enable interrupts on change
-    IOCIE = 1;
-    GIE = 1;                // Enable global interrupts
+    TRISA = 0x0F;       // RA0-3 are inputs
+    ANSELA = 0x00;      // Inputs are NOT analog
+    nWPUEN = 0;         // Global pullups enabled
+    WPUA = 0x0F;        // Pullup resistors on pins RA0-3
+    IOCAN = 0x0F;       // Enable interrupts on change
+    IOCIE = 1;          // Global IOC enable
+    GIE = 1;            // Enable global interrupts
 
     pwm_init(0xFF);
     pwm_start(512);
-    RA4=1;
 
     while (1) { // Main loop
         
@@ -56,25 +58,34 @@ int main(void) {
 
 interrupt isr(){
     if(IOCIF){
+        __delay_ms(DEBOUNCE_DELAY); // Debounce delay
+        
         if(IOCAF0){     // On/Off Button pressed
             TRISA5 = ~TRISA5;
             IOCAF0 = 0;
         }
-        if(IOCAF1){             // Plus button pressed
-            if(CCPR1L > 0xFC)   // Prevent overflows
-                CCPR1L = 0xFF;
-            else
-                CCPR1L += 4;
+        if(IOCAF1){                 // Plus button pressed
+            while(RA1 == 0){        // Repeat action until user depresses key
+                if(CCPR1L > 0xFC){  // Prevent overflows
+                    CCPR1L = 0xFF;
+                } else {
+                    CCPR1L += 4;
+                }
+                __delay_ms(REPEAT_DELAY);
+            }
             IOCAF1 = 0;
         }
-        if(IOCAF2){         // Minus Button pressed
-            if(CCPR1L > 4)  // Prevent underflows
-                CCPR1L -= 4;
-            else
-                CCPR1L = 0;
+        if(IOCAF2){                 // Minus Button pressed
+            while(RA2 == 0){        // Repeat action until user depresses key
+                if(CCPR1L > 4){     // Prevent underflows
+                    CCPR1L -= 4;
+                } else {
+                    CCPR1L = 0;
+                }
+                __delay_ms(REPEAT_DELAY);
+            }
             IOCAF2 = 0;
         }
-        __delay_ms(10); // Debounce delay
         IOCIF = 0;
     }
 }
