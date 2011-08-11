@@ -57,25 +57,26 @@ void pwm_inc() {
 }
 
 int main(void) {
-    OSCCON = 0xF0; // Configure 32 MHz clock
+    OSCCON = 0xF0;  // Configure 32 MHz clock
 
-    TRISA = 0x0F; // RA0-3 are inputs
-    ANSELA = 0x00; // Inputs are NOT analog
-    nWPUEN = 0; // Global pullups enabled
-    WPUA = 0x0F; // Pullup resistors on pins RA0-3
-    IOCAN = 0x0F; // Enable interrupts on change
-    IOCIE = 1; // Global IOC enable
-    GIE = 1; // Enable global interrupts
+    TRISA = 0x0F;   // RA0-3 are inputs
+    ANSELA = 0x00;  // Inputs are NOT analog
+    nWPUEN = 0;     // Global pullups enabled
+    WPUA = 0x0F;    // Pullup resistors on pins RA0-3
+    IOCAN = 0x0F;   // Enable interrupts on change
+    IOCAP = 0x08;
+    IOCIE = 1;      // Global IOC enable
+    GIE = 1;        // Enable global interrupts
 
     pwm_init(0xFF);
     pwm_start(512);
 
-    while (1) { // Main loop
+    while (1) {     // Main loop
 
     }
 }
-// TODO Test repetition
 
+// TODO Test repetition
 interrupt void isr() {
     if (IOCIF) {
         __delay_ms(DEBOUNCE_DELAY); // Debounce delay
@@ -101,6 +102,9 @@ interrupt void isr() {
                 __delay_ms(REPEAT_DELAY);
             }
             IOCAF2 = 0;
+        }
+        if (IOCAF3) { // Got serial data from IR decoder
+            // code to detect serial data
         }
         IOCIF = 0;
     }
