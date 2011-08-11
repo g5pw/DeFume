@@ -1,7 +1,0 @@
-Important
-=============================
-- Add key repetition | TO BE TESTED
-
-Enhancements
-=============================
-- Capacitive buttons
