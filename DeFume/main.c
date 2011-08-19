@@ -16,6 +16,8 @@
 __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_OFF); //Config word 1
 __CONFIG(PLLEN_ON & LVP_OFF);
 
+const char cmd_on = 0b10000001;
+
 void pwm_init(unsigned char period) {
     CCP1SEL = 1; //CCP1 on RA5;
     PR2 = period; // Select 31250Hz PWM period
