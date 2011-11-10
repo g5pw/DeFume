@@ -46,11 +46,11 @@
         <property key="extra-include-directories" value=""/>
         <property key="what-to-do" value="ignore"/>
         <property key="define-macros" value=""/>
-        <property key="optimization-assembler-files" value="false"/>
         <property key="warning-level" value="9"/>
+        <property key="optimization-assembler-files" value="false"/>
         <property key="verbose" value="false"/>
-        <property key="optimization-level" value="-9"/>
         <property key="optimization-debug" value="false"/>
+        <property key="optimization-level" value="-9"/>
         <property key="preprocess-assembler" value="false"/>
         <property key="optimization-global" value="true"/>
         <property key="identifier-length" value="31"/>

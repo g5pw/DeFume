@@ -1,5 +1,7 @@
-_pwm_start: CODE, 114 0 43
-_main: CODE, 157 0 32
-_isr: CODE, 4 0 107
-_pwm_init: CODE, 189 0 12
-Total: 194
+_pwm_start: CODE, 115 0 43
+_main: CODE, 158 0 34
+_isr: CODE, 4 0 108
+_pwm_inc: CODE, 192 0 16
+_pwm_dec: CODE, 208 0 13
+_pwm_init: CODE, 221 0 12
+Total: 226
